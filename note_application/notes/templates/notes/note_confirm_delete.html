@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Delete Note{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto text-center py-16">
+    <h2 class="text-2xl font-bold text-red-600 mb-4">Delete Note?</h2>
+    
+    <p class="text-gray-600 mb-8">
+        Are you sure you want to delete 
+        <strong>"{{ object.title }}"</strong>?
+    </p>
+    
+    <form method="post" class="inline">
+        {% csrf_token %}
+        <button type="submit" 
+                class="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition">
+            Yes, Delete
+        </button>
+    </form>
+    
+    <a href="{% url 'notes:detail' object.pk %}" 
+       class="ml-4 px-6 py-3 text-gray-600 hover:text-gray-800 transition">
+        Cancel
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}{{ note.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white rounded-2xl shadow p-10">
+    <h1 class="text-4xl font-bold text-gray-800 mb-6">{{ note.title }}</h1>
+    
+    <div class="prose max-w-none text-gray-700 text-lg leading-relaxed mb-10">
+        {{ note.description|linebreaks }}
+    </div>
+
+    <div class="border-t pt-6 text-sm text-gray-500">
+        <p>Created: {{ note.created|date:"F d, Y \a\t h:i A" }}</p>
+        <p>Last updated: {{ note.updated|date:"F d, Y \a\t h:i A" }}</p>
+    </div>
+
+    <div class="mt-10 flex gap-4">
+        <a href="{% url 'notes:update' note.pk %}" 
+           class="bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700">
+            Edit
+        </a>
+        <a href="{% url 'notes:delete' note.pk %}" 
+           class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700">
+            Delete
+        </a>
+        <a href="{% url 'notes:list' %}" 
+           class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700">
+            Back to All Notes
+        </a>
+    </div>
+</div>
+{% endblock %}

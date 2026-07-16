@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} {{ note|yesno:"Edit,New" }} Note {% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <h2 class="text-3xl font-bold mb-8">
+        {% if note %}Edit Note{% else %}New Note{% endif %}
+    </h2>
+
+    <form method="post" class="bg-white shadow-md rounded-xl p-8">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <div class="flex gap-4 mt-8">
+            <button type="submit" 
+                    class="bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition">
+                {% if note %}Update{% else %}Create{% endif %} Note
+            </button>
+            <a href="{% url 'notes:list' %}" 
+               class="bg-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-400 transition">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
